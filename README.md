@@ -1,6 +1,7 @@
 # burger-adoption
 
 > Hamburger Adoption Agency
+A quick project using Vue and Buefy. Built with node.
 
 ## Build Setup
 
