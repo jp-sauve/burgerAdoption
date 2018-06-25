@@ -31,10 +31,10 @@
       {{ currentQuestion + 1 }} / {{ questionCount }}
     <button class="button is-dark" v-if="currentQuestion > 0" v-on:click="previousQuestion">
       Back</button>
-    <button class="button is-dark" v-if="currentQuestion + 1 < questionCount" v-on:click="nextQuestion">
-      Next</button>
-    <button class="button is-success" v-if="currentQuestion + 1 === questionCount" v-on:click="submit">
-      Submit</button>
+    <button class="button is-dark" v-if="currentQuestion + 1 < questionCount"
+    v-on:click="nextQuestion">Next</button>
+    <button class="button is-success" v-if="currentQuestion + 1 === questionCount"
+    v-on:click="submit">Submit</button>
       </div>
   </div>
     </div>
@@ -58,10 +58,11 @@ const questions = [
     text: 'What cosmetics should your ideal burger wear?',
     type: 'checkbox',
     resp: [
-      { text: 'Tomaters' },
-      { text: 'Cheesiness' },
-      { text: 'Leafygreens' },
-      { text: 'I can\'t believe it\'s not Bacon!' },
+      { text: 'Tomato' },
+      { text: 'Cheese' },
+      { text: 'Lettuce' },
+      { text: 'Bacon' },
+      { text: 'Mushroom'},
     ],
     answer: [],
 
@@ -70,9 +71,10 @@ const questions = [
     text: 'Many burgers come wet with lotions. Which lotions are the good lotions?',
     type: 'checkbox',
     resp: [
-      { text: 'Catsup' },
-      { text: 'Grey Pupon' },
-      { text: 'Miracle Flip' },
+      { text: 'Ketchup' },
+      { text: 'Mustard' },
+      { text: 'Mayonnaise' },
+      { text: 'Sriracha' },
     ],
     answer: [],
 
@@ -97,6 +99,7 @@ export default {
       this.currentQuestion -= 1;
     },
     submit() {
+
     },
   },
   computed: {

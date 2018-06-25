@@ -36,6 +36,7 @@ export default {
   methods: {
     startQuiz() {
       this.visible = !this.visible;
+      // eslint-disable-next-line
       this.$router.push({ path: this.$route.path + '/questions' });
     },
   },
