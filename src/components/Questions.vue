@@ -14,7 +14,7 @@
       <div v-if="q.type == 'checkbox'">
         <b-checkbox-group>
       <li v-for="(r, index) in q.resp" :key="r.text">
-        <b-checkbox :id="index" :native-value="r.text" :v-model="q.answer"></b-checkbox>
+        <b-checkbox :id="index" :native-value="r.text" :v-model="this.$store.state.answer"></b-checkbox>
         <input type="checkbox" :id="index" :value="r.text" v-model="q.answer">
           {{ index }}: {{ r.text }}
 
@@ -62,7 +62,7 @@ const questions = [
       { text: 'Cheese' },
       { text: 'Lettuce' },
       { text: 'Bacon' },
-      { text: 'Mushroom'},
+      { text: 'Mushroom' },
     ],
     answer: [],
 
@@ -75,7 +75,7 @@ const questions = [
       { text: 'Mustard' },
       { text: 'Mayonnaise' },
       { text: 'Sriracha' },
-      { text: 'Salsa'},
+      { text: 'Salsa' },
     ],
     answer: [],
 

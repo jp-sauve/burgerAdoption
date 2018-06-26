@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -11,72 +12,76 @@ const store = new Vuex.Store({
         patty: 'Vegan',
         topping: ['Lettuce', 'Tomato'],
         sauce: ['Sriracha'],
-        active: true,
+        visible: true,
       },
       {
         name: 'Greener Burger',
         patty: 'Vegan',
         topping: ['Lettuce', 'Mushroom'],
         sauce: ['Salsa', 'Sriracha'],
-        active: true,
+        visible: true,
       },
       {
         name: 'Sustainable Burger',
         patty: 'Vegan',
         topping: ['Lettuce'],
         sauce: ['Salsa'],
-        active: true,
+        visible: true,
       },
       {
         name: 'Life Burger',
         patty: 'Vegetarian',
         topping: ['Tomato', 'Mushroom', 'Lettuce'],
         sauce: ['Mayonnaise', 'Salsa'],
-        active: true,
+        visible: true,
       },
       {
         name: 'Peace Burger',
         patty: 'Vegetarian',
         topping: ['Tomato', 'Cheese'],
         sauce: ['Ketchup'],
-        active: true,
+        visible: true,
       },
       {
         name: 'Green Burger',
         patty: 'Vegetarian',
         topping: ['Lettuce', 'Tomato'],
         sauce: ['Ketchup', 'Mustard'],
-        active: true,
+        visible: true,
       },
       {
         name: 'Bessie Burger',
         patty: 'Carnivore',
         topping: ['Lettuce', 'Tomato', 'Cheese'],
         sauce: ['Ketchup', 'Mustard'],
-        active: true,
+        visible: true,
       },
       {
         name: 'Wilbur Burger',
         patty: 'Carnivore',
         topping: ['Lettuce', 'Bacon'],
         sauce: ['Ketchup'],
-        active: true,
+        visible: true,
       },
       {
         name: 'Multispecies Grease Burger',
         patty: 'Carnivore',
         topping: ['Lettuce', 'Cheese', 'Bacon', 'Mushroom'],
         sauce: ['Mayonnaise', 'Sriracha'],
-        active: true,
+        visible: true,
       },
-    ] },
+    ],
+    answers: [],
+  },
+  getters: {},
   mutations: {
     setBurgerVisibility(state) {
-      state.burgers.forEach(function(burger,index,array) {
-        array[index].active = true;
+      state.burgers.forEach(function (burger, index, array) {
+        array[index].visible = true;
       });
     },
   },
+  actions: {},
 });
 
 export default store;
