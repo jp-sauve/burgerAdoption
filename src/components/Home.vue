@@ -12,6 +12,7 @@
     <section class="section">
       <p>Welcome to the one and only Hamburger adoption Agency!
         We currently have {{ totalBurgers }} burgers ready to take home!</p>
+      <p>Who are you? Enter your name below, and hit enter!</p>
       <p><b-field>
         <b-input type="text" placeholder="Enter your name to begin..."
                  v-model="yourName" @keyup.native.enter="startSurvey"></b-input>
@@ -26,7 +27,7 @@ export default {
   data() {
     return {
       msg: Date(),
-      totalBurgers: 5,
+      totalBurgers: 9,
       yourName: '',
     };
   },
