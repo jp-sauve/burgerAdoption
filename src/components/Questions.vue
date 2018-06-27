@@ -1,44 +1,52 @@
 <template>
   <div id="outer" class="tile is-ancestor">
     <div class="tile is-parent is-vertical is-4">
-    <div class="tile is-child box"></div>
-    <div class="tile is-child box"></div>
+      <div class="tile is-child box"></div>
+      <div class="tile is-child box"></div>
     </div>
 
-  <div v-for="(q, index) in questions" :key="q.text">
-    <div v-if="index === currentQuestion">
-      <div class="tile is-parent is-8">
-        <div class="tile is-child box">
-    <p class="title">{{ q.text }}</p>
-    <ul>
-      <div v-if="q.type == 'checkbox'">
-        <b-checkbox-group>
-      <li v-for="(r, index) in q.resp" :key="r.text">
-        <b-checkbox :id="index" :native-value="r.text" :v-model="this.$store.state.answer"></b-checkbox>
-        <input type="checkbox" :id="index" :value="r.text" v-model="q.answer">
-          {{ index }}: {{ r.text }}
-
-      </li>
-        </b-checkbox-group>
+    <div v-for="(q, q_index) in questions" :key="q.text">
+      <div v-if="q_index === currentQuestion">
+        <div class="tile is-parent is-8">
+          <div class="tile is-child box">
+            <p class="title">{{ q.text }}</p>
+            <ul>
+              <transition name="slide-fade">
+              <div v-if="q.type == 'checkbox'">
+                <li v-for="(r, ch_index) in q.resp"
+                    :key="r.text">
+                  <input type="checkbox"
+                         :id="ch_index"
+                         :value="r.text"
+                         v-model="answers[q_index]">
+                  {{ ch_index }}: {{ r.text }}
+                </li>
+              </div>
+              </transition>
+              <transition name="slide-fade" mode="out-in">
+              <div v-if="q.type == 'radio'">
+                <li v-for="(r, r_index) in q.resp" :key="r.text">
+                  <input type="radio"
+                         :id="r_index"
+                         :value="r.text"
+                         v-model="answers[q_index]">
+                  <label :for="r.text">{{ r_index }}: {{ r.text }}</label>
+                </li>
+              </div>
+              </transition>
+            </ul>
+            {{ currentQuestion + 1 }} / {{ questionCount }}
+            <button class="button is-dark" v-if="currentQuestion > 0" v-on:click="previousQuestion">
+              Back</button>
+            <button class="button is-dark"
+                    v-if="currentQuestion + 1 < questionCount"
+                    v-on:click="nextQuestion">Next</button>
+            <button class="button is-success" v-if="currentQuestion + 1 === questionCount"
+                    v-on:click="submit">Submit</button>
+          </div>
+        </div>
       </div>
-      <div v-if="q.type == 'radio'">
-        <li v-for="(r, index) in q.resp" :key="r.text">
-            <input type="radio" :id="index" :value="r.text" v-model="q.answer">
-          <label :for="r.text">{{ index }}: {{ r.text }}</label>
-        </li>
-      </div>
-    </ul>
-      {{ currentQuestion + 1 }} / {{ questionCount }}
-    <button class="button is-dark" v-if="currentQuestion > 0" v-on:click="previousQuestion">
-      Back</button>
-    <button class="button is-dark" v-if="currentQuestion + 1 < questionCount"
-    v-on:click="nextQuestion">Next</button>
-    <button class="button is-success" v-if="currentQuestion + 1 === questionCount"
-    v-on:click="submit">Submit</button>
-      </div>
-  </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -90,6 +98,7 @@ export default {
       yourName: '',
       questions,
       currentQuestion: 0,
+      answers: Array(questions.length).fill([]),
     };
   },
   methods: {
@@ -100,7 +109,10 @@ export default {
       this.currentQuestion -= 1;
     },
     submit() {
-
+      this.$store.commit('submitAnswers', this.answers);
+      this.$store.commit('updateBurgerVisibility');
+      // eslint-disable-next-line
+      this.$router.push({ path: '/hamburgers' });
     },
   },
   computed: {
@@ -112,5 +124,14 @@ export default {
 </script>
 
 <style scoped>
-
+  .slide-fade-enter-active {
+    transition: all .5s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+  }
 </style>

@@ -1,7 +1,8 @@
 <template>
-  <div class="columns">
-<div v-for="burger in visibleBurgers(burgers)" :key="burger.name"
-  class="column is-half-tablet is-one-quarter-desktop">
+    <transition-group class="columns is-multiline" name="list" tag="div">
+<div v-for="burger in visibleBurgers(burgers)"
+     :key="burger.name"
+     class="column is-6-tablet is-4-desktop is-3-fullhd">
   <div class="card">
 <div class="card-image">
     <figure class="image is-4by3">
@@ -17,21 +18,17 @@
       </div>
       <div class="media-content">
         <p class="title is-4">{{burger.name}}</p>
-        <p class="subtitle is-6">@johnsmith</p>
+        <p class="subtitle is-6">A {{ burger.patty }} burger</p>
       </div>
     </div>
-
     <div class="content">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-      <a href="#">#css</a> <a href="#">#responsive</a>
-      <br>
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+{{ burger.description }}
     </div>
   </div>
 </div>
   </div>
-</div>
+    </transition-group>
+
 </template>
 
 <script>
@@ -47,5 +44,10 @@ export default {
 </script>
 
 <style scoped>
-
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to {
+    opacity: 0;
+  }
 </style>
